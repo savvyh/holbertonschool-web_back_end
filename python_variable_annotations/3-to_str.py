@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Create a function that return a string but with a float as arg."""
 
 
