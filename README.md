@@ -3,6 +3,7 @@
 
 * Python Variable Annotations
 * Python Async Function
+* Python Async Comprehension
 
 ## Authors 🧞‍♀️
 Sarah Boutier
