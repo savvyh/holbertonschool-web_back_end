@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Function that return a tuple with the string k and the square of v as a float."""
+"""Function that return a tuple with the string k and the square of v."""
 
 from typing import Tuple, Union
 
