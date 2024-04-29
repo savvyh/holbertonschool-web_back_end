@@ -4,6 +4,7 @@
 * Python Variable Annotations
 * Python Async Function
 * Python Async Comprehension
+* NoSQL - MongoDB
 
 ## Authors 🧞‍♀️
 Sarah Boutier
