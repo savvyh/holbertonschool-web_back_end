@@ -1,4 +1,5 @@
 # Web Back-End - Pagination
+![_65a13254-254b-40f5-8449-559b729262f4](https://github.com/savvyh/holbertonschool-web_back_end/assets/139894873/36105491-579d-421b-81b4-87d5a90c91b9)
 
 ## General 📃
 To paginate with simple parameters, like page and page_size, servers fetch specific dataset subsets based on client requests. Hypermedia metadata pagination adds navigation links to responses, enhancing user interaction. Deletion-resilient pagination employs cursor-based methods, ensuring consistency despite dataset changes.
