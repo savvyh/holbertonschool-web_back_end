@@ -5,6 +5,7 @@
 * Python Async Function
 * Python Async Comprehension
 * NoSQL - MongoDB
+* Pagination
 
 ## Authors 🧞‍♀️
 Sarah Boutier
