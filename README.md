@@ -6,6 +6,7 @@
 * Python Async Comprehension
 * NoSQL - MongoDB
 * Pagination
+* ES_6 JavaScript - basics
 
 ## Authors 🧞‍♀️
 Sarah Boutier
