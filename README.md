@@ -7,6 +7,8 @@
 * NoSQL - MongoDB
 * Pagination
 * ES_6 JavaScript - basics
+* ES_6 JavaScript - classes
+* ES_6 JavaScript - promise
 
 ## Authors 🧞‍♀️
 Sarah Boutier
