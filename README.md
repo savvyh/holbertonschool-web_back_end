@@ -9,6 +9,7 @@
 * ES_6 JavaScript - basics
 * ES_6 JavaScript - classes
 * ES_6 JavaScript - promise
+* ES_6 JavaScript - data manipulation
 
 ## Authors 🧞‍♀️
 Sarah Boutier
