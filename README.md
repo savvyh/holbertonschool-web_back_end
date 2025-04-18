@@ -10,6 +10,7 @@
 * ES_6 JavaScript - classes
 * ES_6 JavaScript - promise
 * ES_6 JavaScript - data manipulation
+* Caching
 
 ## Authors 🧞‍♀️
 Sarah Boutier
