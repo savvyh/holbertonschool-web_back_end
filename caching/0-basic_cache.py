@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-BasicCache class that inherits from BaseCaching and is a caching system
+Module for implementing a basic caching system
 """
 from base_caching import BaseCaching
 
