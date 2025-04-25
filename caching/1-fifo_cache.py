@@ -5,7 +5,7 @@ Module for implementing a FIFO caching system
 from base_caching import BaseCaching
 
 
-class FIFOCache (BaseCaching):
+class FIFOCache(BaseCaching):
     """
     FIFOCache class that inherits from BaseCaching and is a caching system
     """
@@ -16,13 +16,15 @@ class FIFOCache (BaseCaching):
         """
         Add an item in the cache
         """
-        self.cache_data[key] = item
         if key is None or item is None:
             return
 
+        self.cache_data[key] = item
+
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            discardElement = self.cache_data.pop(0)
-            print(f"DISCARD: {discardElement}")
+            first_key = next(iter(self.cache_data))
+            del self.cache_data[first_key]
+            print(f"DISCARD: {first_key}")
 
     def get(self, key):
         """
