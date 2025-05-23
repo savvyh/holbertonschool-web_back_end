@@ -7,7 +7,7 @@ import re
 import logging
 import os
 import mysql.connector
-from typing import List, Tuple, Any
+from typing import List, Tuple, Any, Dict, Union
 
 PII_FIELDS: Tuple[str, ...] = ("name", "email", "phone", "ssn", "password")
 
@@ -35,8 +35,9 @@ class RedactingFormatter(logging.Formatter):
         """
         format function
         """
+        formatted_message: str = super().format(record)
         return self.filter_datum(
-            self.fields, self.REDACTION, super().format(record), self.SEPARATOR
+            self.fields, self.REDACTION, formatted_message, self.SEPARATOR
             )
 
     def filter_datum(
@@ -49,10 +50,14 @@ class RedactingFormatter(logging.Formatter):
         """
         filter_datum function
         """
+        filtered_message: str = message
         for field in fields:
-            message = re.sub(f'{field}=[^{separator}]*',
-                             f'{field}={redaction}', message)
-        return message
+            filtered_message = re.sub(
+                f'{field}=[^{separator}]*',
+                f'{field}={redaction}',
+                filtered_message
+            )
+        return filtered_message
 
 
 def get_logger() -> logging.Logger:
@@ -64,7 +69,8 @@ def get_logger() -> logging.Logger:
     logger.propagate = False
 
     stream_handler: logging.StreamHandler = logging.StreamHandler()
-    stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    formatter: RedactingFormatter = RedactingFormatter(PII_FIELDS)
+    stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
 
     return logger
@@ -79,12 +85,13 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     host: str = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
     database: str = os.getenv("PERSONAL_DATA_DB_NAME")
 
-    return mysql.connector.connect(
+    connection: mysql.connector.connection.MySQLConnection = mysql.connector.connect(
         user=username,
         password=password,
         host=host,
         database=database
     )
+    return connection
 
 
 def main() -> None:
