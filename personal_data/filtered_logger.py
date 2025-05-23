@@ -30,11 +30,13 @@ class RedactingFormatter(logging.Formatter):
             self.fields, self.REDACTION, super().format(record), self.SEPARATOR
             )
 
-    def filter_datum(self, fields, redaction, message, separator):
+    def filter_datum(fields, redaction, message, separator):
         """
         filter_datum function
         """
-        return re.sub(r'{}'.format(fields, separator), redaction, message)
+        for field in fields:
+            message = re.sub(f'{field}=[^{separator}]*', f'{field}={redaction}', message)
+        return message
 
 
 def get_logger():
