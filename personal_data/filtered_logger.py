@@ -22,7 +22,9 @@ class RedactingFormatter(logging.Formatter):
     """
 
     REDACTION: str = "***"
-    FORMAT: str = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    FORMAT: str = (
+        "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    )
     SEPARATOR: str = ";"
 
     def __init__(self, fields: List[str]) -> None:
@@ -37,7 +39,13 @@ class RedactingFormatter(logging.Formatter):
             self.fields, self.REDACTION, super().format(record), self.SEPARATOR
             )
 
-    def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
+    def filter_datum(
+        self,
+        fields: List[str],
+        redaction: str,
+        message: str,
+        separator: str
+    ) -> str:
         """
         filter_datum function
         """
@@ -89,8 +97,9 @@ def main() -> None:
     logger: logging.Logger = get_logger()
 
     for row in sql_query:
-        message: str = "; ".join([f"{field}={value}" for field,
-                              value in zip(sql_query.column_names, row)])
+        message: str = "; ".join(
+            [f"{field}={value}"
+             for field, value in zip(sql_query.column_names, row)])
         logger.info(message)
 
     sql_query.close()
