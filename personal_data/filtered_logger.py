@@ -8,7 +8,7 @@ import logging
 import os
 import mysql.connector
 
-PII_FIELDS = ("name", "email", "phone", "ssn", "ip")
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 """
 Redacting Formatter class
@@ -77,3 +77,24 @@ def get_db():
         database=database
     )
 
+
+def main():
+    """
+    main function
+    """
+    db = get_db()
+    sql_query = db.cursor()
+    sql_query.execute("SELECT * FROM users")
+    logger = get_logger()
+
+    for row in sql_query:
+        message = "; ".join([f"{field}={value}" for field,
+                             value in zip(sql_query.column_names, row)])
+        logger.info(message)
+
+    sql_query.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
