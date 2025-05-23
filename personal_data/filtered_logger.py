@@ -8,6 +8,10 @@ import logging
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "ip")
 
+"""
+Redacting Formatter class
+"""
+
 
 class RedactingFormatter(logging.Formatter):
     """
