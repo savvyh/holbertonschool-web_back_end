@@ -50,14 +50,11 @@ class RedactingFormatter(logging.Formatter):
         """
         filter_datum function
         """
-        filtered_message: str = message
         for field in fields:
-            filtered_message = re.sub(
-                f'{field}=[^{separator}]*',
-                f'{field}={redaction}',
-                filtered_message
-            )
-        return filtered_message
+            pattern = f'{field}=[^{separator}]*'
+            new_message = f'{field}={redaction}'
+            message = re.sub(pattern, new_message, message)
+        return message
 
 
 def get_logger() -> logging.Logger:
