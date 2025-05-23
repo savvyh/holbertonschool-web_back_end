@@ -35,7 +35,8 @@ class RedactingFormatter(logging.Formatter):
         filter_datum function
         """
         for field in fields:
-            message = re.sub(f'{field}=[^{separator}]*', f'{field}={redaction}', message)
+            message = re.sub(f'{field}=[^{separator}]*',
+                             f'{field}={redaction}', message)
         return message
 
 
