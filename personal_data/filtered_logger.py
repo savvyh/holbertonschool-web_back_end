@@ -4,16 +4,32 @@ filtered logger module
 """
 
 import re
+import logging
 
-"""
-fields: list of strings representing all fields to obfuscate
-redaction: string representing by what the field will be obfuscated
-message: string representing the log line
-separator: str representing by which char is separating each field
-"""
 
-def filter_datum(fields, redaction, message, separator):
+class RedactingFormatter(logging.Formatter):
     """
-    filter_datum function
+    Redacting Formatter class
     """
-    return re.sub(r'{}'.format(fields, separator), redaction, message)
+
+    REDACTION = "***"
+    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    SEPARATOR = ";"
+
+    def __init__(self, fields):
+        super(RedactingFormatter, self).__init__(self.FORMAT)
+        self.fields = fields
+
+    def format(self, record: logging.LogRecord) -> str:
+        """
+        format function
+        """
+        return self.filter_datum(
+            self.fields, self.REDACTION, super().format(record), self.SEPARATOR
+            )
+
+    def filter_datum(self, fields, redaction, message, separator):
+        """
+        filter_datum function
+        """
+        return re.sub(r'{}'.format(fields, separator), redaction, message)
