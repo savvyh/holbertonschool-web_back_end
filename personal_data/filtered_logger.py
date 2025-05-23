@@ -6,7 +6,7 @@ filtered logger module
 import re
 import logging
 
-PII_FIELDS = ("name", "email", "phone", "ssn", "address")
+PII_FIELDS = ("name", "email", "phone", "ssn", "ip")
 
 
 class RedactingFormatter(logging.Formatter):
