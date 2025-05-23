@@ -7,6 +7,7 @@ import re
 import logging
 import os
 import mysql.connector
+from typing import List
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -36,7 +37,7 @@ class RedactingFormatter(logging.Formatter):
             self.fields, self.REDACTION, super().format(record), self.SEPARATOR
             )
 
-    def filter_datum(fields, redaction, message, separator):
+    def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
         """
         filter_datum function
         """
