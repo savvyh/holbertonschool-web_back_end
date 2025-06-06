@@ -11,6 +11,8 @@
 * ES_6 JavaScript - promise
 * ES_6 JavaScript - data manipulation
 * Caching
+* Personnal Data
+* Basic Authentication
 
 ## Authors 🧞‍♀️
 Sarah Boutier
