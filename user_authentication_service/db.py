@@ -54,6 +54,14 @@ class DB:
         """Update a user by user_id
         """
         user = self.find_user_by(id=user_id)
+
+        valid_attributes = ['email', 'hashed_password',
+                            'session_id', 'reset_token']
+        for key in kwargs.keys():
+            if key not in valid_attributes:
+                raise ValueError
+
         for key, value in kwargs.items():
             setattr(user, key, value)
+
         self._session.commit()
