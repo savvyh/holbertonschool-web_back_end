@@ -48,6 +48,6 @@ class Auth:
             return False
 
     def _generate_uuid(self) -> str:
-        """Generate a UUID
+        """Generate a UUID, private method
         """
         return str(uuid.uuid4())
