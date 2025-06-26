@@ -97,8 +97,8 @@ def main() -> None:
     """
     main function
     """
-    db: mysql.connector.connection.MySQLConnection = get_db()
-    sql_query: mysql.connector.cursor.MySQLCursor = db.cursor()
+    db = get_db()
+    sql_query = db.cursor()
     sql_query.execute("SELECT * FROM users")
     logger: logging.Logger = get_logger()
 
