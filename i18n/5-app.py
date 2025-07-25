@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Basic Flask app with Babel, locale parameter detection and user login simulation
+Basic Flask app with Babel, locale parameter detection
+and user login simulation
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, gettext
