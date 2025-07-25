@@ -4,7 +4,7 @@ Basic Flask app with Babel, locale parameter detection
 and user login simulation
 """
 from flask import Flask, render_template, request, g
-from flask_babel import Babel, gettext
+from flask_babel import Babel
 
 app = Flask(__name__)
 
@@ -19,7 +19,6 @@ class Config:
 app.config.from_object(Config)
 babel = Babel(app)
 
-# Mock user database
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
