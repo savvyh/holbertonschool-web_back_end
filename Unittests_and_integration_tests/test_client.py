@@ -4,9 +4,10 @@ A module for testing the client module.
 """
 
 import unittest
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 from unittest.mock import patch, Mock, PropertyMock
 from client import GithubOrgClient
+from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -72,3 +73,36 @@ class TestGithubOrgClient(unittest.TestCase):
         """Test GithubOrgClient.has_license returns the expected boolean."""
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
+
+
+@parameterized_class([
+    {
+        "org_payload": TEST_PAYLOAD[0][0],
+        "repos_payload": TEST_PAYLOAD[0][1],
+        "expected_repos": TEST_PAYLOAD[0][2],
+        "apache2_repos": TEST_PAYLOAD[0][3],
+    }
+])
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """
+    A class for testing the GithubOrgClient class in integration.
+    """
+
+    @classmethod
+    def setUpClass(self):
+        """Set up test fixtures before running tests."""
+        self.get_patcher = patch('requests.get')
+        self.mock_get = self.get_patcher.start()
+
+        def get_patcher(url):
+            """Start a patch for requests.get"""
+            mock_response = Mock()
+            if "orgs/google" in url:
+                mock_response.json.return_value = self.org_payload
+            elif "repos" in url:
+                mock_response.json.return_value = self.repos_payload
+
+    @classmethod
+    def tearDownClass(self):
+        """Stop the patch for requests.get"""
+        self.get_patcher.stop()
