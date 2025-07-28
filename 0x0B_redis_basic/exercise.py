@@ -4,6 +4,29 @@ Redis basic
 """
 import redis
 import uuid
+from typing import Callable
+from functools import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    """
+    Counts number of calls to a class method
+    Args:
+        method: The method to count the calls of.
+        Callable: The class method to count the calls of.
+    Returns:
+        The number of calls to the method.
+    """
+    key = method.__qualname__
+    
+    @wraps(method)
+    def wrapper(self, *args, **kwds):
+        """
+        Wrapper function to count the calls to a method.
+        """
+        self._redis.incr(key)
+        return method(self, *args, **kwds)
+    return wrapper
 
 
 class Cache:
@@ -17,6 +40,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data):
         """
         Generate a random key and store input in Redis.
@@ -25,7 +49,7 @@ class Cache:
         Returns:
             The key of the stored data.
         """
-        random_key = str(uuid.uuid1())
+        random_key = str(uuid.uuid4())
         self._redis.set(random_key, data)
         return random_key
 
