@@ -75,6 +75,7 @@ class Cache:
     """
     Cache class
     """
+
     def __init__(self):
         """
         Store an instance of redis client and flush it.
