@@ -13,6 +13,7 @@
 * Caching
 * Personnal Data
 * Basic Authentication
+* Unittests in JS
 
 ## Authors 🧞‍♀️
 Sarah Boutier
